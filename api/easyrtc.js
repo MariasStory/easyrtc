@@ -7533,11 +7533,13 @@ var Easyrtc = function() {
         // fires. Firefox produces two events (one of type "video",
         // and one of type "audio".
 
-        for (var i = 0, l = peerStreams.length; i < l; i++) {
-            var peerStream = peerStreams[i],
-                streamId = peerStream.id || "default";
-            clearTimeout(peerConn.trackTimers[streamId]);
-            peerConn.trackTimers[streamId] = setTimeout(processAddedStream.bind(null, otherUser, peerStream), 100); // Bind peerStream
+        if (peerStreams) {
+            for (var i = 0, l = peerStreams.length; i < l; i++) {
+                var peerStream = peerStreams[i],
+                    streamId = peerStream.id || "default";
+                clearTimeout(peerConn.trackTimers[streamId]);
+                peerConn.trackTimers[streamId] = setTimeout(processAddedStream.bind(null, otherUser, peerStream), 100); // Bind peerStream
+            }
         }
     }
 
